@@ -206,8 +206,8 @@ jobs:
           CONFIG_PACKAGE_luci-app-usb-printer=y
           CONFIG_PACKAGE_luci-app-wol=y
           CONFIG_PACKAGE_luci-app-xlnetacc=y
-          CONFIG_PACKAGE_luci-app-samba=y
-          CONFIG_PACKAGE_luci-app-samba4=y
+          #CONFIG_PACKAGE_luci-app-samba=y
+          #CONFIG_PACKAGE_luci-app-samba4=y
           CONFIG_PACKAGE_luci-app-vsftpd=y
           CONFIG_PACKAGE_luci-app-watchcat=y
           EOF
