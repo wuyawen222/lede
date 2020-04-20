@@ -7,7 +7,7 @@
 # <https://github.com/KFERMercer/OpenWrt-CI>
 #
 
-name: yawen1.6_protocol
+name: yawen1.5_onlysamba4.0
 
 on:
   push:
@@ -57,7 +57,9 @@ jobs:
           sudo -E apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler
           sudo -E apt-get -y autoremove --purge
           sudo -E apt-get clean
+          
 
+          
       - name: Update feeds
         run: |
           ./scripts/feeds update -a
@@ -118,20 +120,22 @@ jobs:
           CONFIG_EFI_IMAGES=y
           EOF
 
-          # IPv6等protocol支持:
+          # IPv6支持:
           cat >> .config <<EOF
           CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
           CONFIG_PACKAGE_ipv6helper=y
-          #CONFIG_PACKAGE_luci-proto-bonding=y
-          #CONFIG_PACKAGE_luci-proto-ipip=y
-          #CONFIG_PACKAGE_luci-proto-ipv6=y
-          #CONFIG_PACKAGE_luci-proto-ncm=y
-          #CONFIG_PACKAGE_luci-proto-openconnect=y
-          #CONFIG_PACKAGE_luci-proto-ppp=y
-          #CONFIG_PACKAGE_luci-proto-qmi=y
-          #CONFIG_PACKAGE_luci-proto-relay=y
-          #CONFIG_PACKAGE_luci-proto-vpnc=y
-          #CONFIG_PACKAGE_luci-proto-wireguard=y
+          CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
+          CONFIG_PACKAGE_ipv6helper=y
+          CONFIG_PACKAGE_luci-proto-bonding=y
+          CONFIG_PACKAGE_luci-proto-ipip=y
+          CONFIG_PACKAGE_luci-proto-ipv6=y
+          CONFIG_PACKAGE_luci-proto-ncm=y
+          CONFIG_PACKAGE_luci-proto-openconnect=y
+          CONFIG_PACKAGE_luci-proto-ppp=y
+          CONFIG_PACKAGE_luci-proto-qmi=y
+          CONFIG_PACKAGE_luci-proto-relay=y
+          CONFIG_PACKAGE_luci-proto-vpnc=y
+          CONFIG_PACKAGE_luci-proto-wireguard=y
           EOF
 
           # 多文件系统支持:
@@ -158,7 +162,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-adbyby-plus=y
           CONFIG_PACKAGE_luci-app-aria2=y
           #CONFIG_PACKAGE_luci-app-baidupcs-web=y
-          CONFIG_PACKAGE_luci-app-docker=y
+          #CONFIG_PACKAGE_luci-app-docker=y
           CONFIG_PACKAGE_luci-app-frpc=y
           CONFIG_PACKAGE_luci-app-hd-idle=y
           CONFIG_PACKAGE_luci-app-kodexplorer=y
@@ -210,37 +214,14 @@ jobs:
           #CONFIG_PACKAGE_luci-app-samba4=y
           CONFIG_PACKAGE_luci-app-vsftpd=y
           CONFIG_PACKAGE_luci-app-watchcat=y
+          CONFIG_PACKAGE_luci-app-dockerman=y
           EOF
-
-
-
-          #libraries
-          cat >> .config <<EOF
-          CONFIG_PACKAGE_luci-lib-docker=y
-          CONFIG_PACKAGE_luci-lib-dracula=y
-          CONFIG_PACKAGE_luci-lib-httpclient=y
-          CONFIG_PACKAGE_luci-lib-httpprotoutils=y
-          CONFIG_PACKAGE_luci-lib-ip=y
-          CONFIG_PACKAGE_luci-lib-iptparser=y
-          CONFIG_PACKAGE_luci-lib-jquery-1-4=y
-          CONFIG_PACKAGE_luci-lib-json=y
-          CONFIG_PACKAGE_luci-lib-jsonc=y
-          CONFIG_PACKAGE_luci-lib-luaneightbl=y
-          CONFIG_PACKAGE_luci-lib-nixio=y
-          CONFIG_PACKAGE_luci-lib-px5g=y
-          EOF
-
-
 
           # LuCI主题:
           cat >> .config <<EOF
           CONFIG_PACKAGE_luci-theme-argon=y
           CONFIG_PACKAGE_luci-theme-netgear=y
-          CONFIG_PACKAGE_luci-theme-bootstrap=y
-          CONFIG_PACKAGE_luci-theme-material=y
           EOF
-
-
 
           # 常用软件包:
           cat >> .config <<EOF
